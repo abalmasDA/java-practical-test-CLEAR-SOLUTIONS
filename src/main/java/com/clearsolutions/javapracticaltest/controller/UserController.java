@@ -82,7 +82,7 @@ public class UserController {
    * @param toDate   The end date of the birthdate range.
    * @return A list of UserDto objects within the specified birthdate range.
    */
-  @GetMapping(value = "/filter", params = {"fromDate", "toDate"})
+  @GetMapping(params = {"fromDate", "toDate"})
   public List<UserDto> searchUsersByBirthDateRange(@RequestParam LocalDate fromDate,
       @RequestParam LocalDate toDate) {
     return userService.searchUsersByBirthDateRange(fromDate, toDate);
