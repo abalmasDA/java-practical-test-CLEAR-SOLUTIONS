@@ -23,7 +23,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-  private static final Logger log = LogManager.getLogger(GlobalExceptionHandler.class);
+  private static final Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);
 
 
   /**
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(Exception.class)
   public ResponseEntity<?> handleExceptionErrors(Exception ex) {
-    log.error("Handling Exception: {}", ex.getMessage(), ex);
+    logger.error("Handling Exception: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(
         "Oops! Something went wrong:( We're working to fix it! Please try again later:)");
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(NoResourceFoundException.class)
   public ResponseEntity<?> handleNoResourceFoundException(NoResourceFoundException ex) {
-    log.error("Handling NoResourceFoundException: {}", ex.getMessage(), ex);
+    logger.error("Handling NoResourceFoundException: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
   }
@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public Map<String, String> handleMethodArgumentNotValidExceptions(
       MethodArgumentNotValidException ex) {
-    log.error("Handling MethodArgumentNotValidException: {}", ex.getMessage(), ex);
+    logger.error("Handling MethodArgumentNotValidException: {}", ex.getMessage(), ex);
     Map<String, String> errors = new HashMap<>();
     ex.getBindingResult().getFieldErrors()
         .forEach((error -> errors.put(error.getField(), error.getDefaultMessage())));
@@ -74,7 +74,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(UserNotFoundException.class)
   public ResponseEntity<?> handleUserNotFoundExceptions(UserNotFoundException ex) {
-    log.error("Handling UserNotFoundException: {}", ex.getMessage(), ex);
+    logger.error("Handling UserNotFoundException: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
   }
@@ -84,7 +84,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(AgeValidationException.class)
   public ResponseEntity<?> handleAgeValidationExceptions(AgeValidationException ex) {
-    log.error("Handling AgeValidationException: {}", ex.getMessage(), ex);
+    logger.error("Handling AgeValidationException: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
   }
@@ -94,7 +94,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(DateRangeException.class)
   public ResponseEntity<?> handleDateRangeExceptions(DateRangeException ex) {
-    log.error("Handling DateRangeException: {}", ex.getMessage(), ex);
+    logger.error("Handling DateRangeException: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
   }
@@ -104,7 +104,7 @@ public class GlobalExceptionHandler {
    */
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<?> handleIlConstraintViolationException(ConstraintViolationException ex) {
-    log.error("Handling ConstraintViolationException: {}", ex.getMessage(), ex);
+    logger.error("Handling ConstraintViolationException: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
   }
