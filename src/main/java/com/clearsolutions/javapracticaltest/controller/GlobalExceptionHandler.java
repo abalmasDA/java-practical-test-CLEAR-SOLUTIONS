@@ -103,7 +103,7 @@ public class GlobalExceptionHandler {
    * Handles exceptions ConstraintViolationException by returning an HTTP status 400.
    */
   @ExceptionHandler(ConstraintViolationException.class)
-  public ResponseEntity<?> handleIlConstraintViolationException(ConstraintViolationException ex) {
+  public ResponseEntity<?> handleIlConstraintViolationExceptions(ConstraintViolationException ex) {
     logger.error("Handling ConstraintViolationException: {}", ex.getMessage(), ex);
     ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);

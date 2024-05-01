@@ -28,7 +28,6 @@ public class UserDto {
   @NotBlank
   private String lastName;
 
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @Past
   @NotNull
   private LocalDate birthDate;
