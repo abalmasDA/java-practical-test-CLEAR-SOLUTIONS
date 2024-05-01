@@ -6,10 +6,8 @@ import com.clearsolutions.javapracticaltest.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring",
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 public abstract class UserMapper implements DataMapper<UserDto, User> {
 
   @Mapping(target = "id", ignore = true)
