@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Past;
 import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Data Transfer Object (DTO) representing the user info.
