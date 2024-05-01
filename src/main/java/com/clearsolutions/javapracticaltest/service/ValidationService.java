@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +18,8 @@ public class ValidationService {
 
   private final Validator validator;
 
-  @Value("${user.minValidAge}")
-  private int minValidAge;
+  private final Environment environment;
+
 
   /**
    * Validates the user's age based on the minimum valid age.
@@ -29,6 +29,7 @@ public class ValidationService {
    *                                age.
    */
   public void validateUserAge(LocalDate birthDate) {
+    int minValidAge = Integer.parseInt(environment.getRequiredProperty("user.minValidAge"));
     Period period = Period.between(birthDate, LocalDate.now());
     if (period.getYears() < minValidAge) {
       throw new AgeValidationException("User must be at least " + minValidAge + " years old.");
