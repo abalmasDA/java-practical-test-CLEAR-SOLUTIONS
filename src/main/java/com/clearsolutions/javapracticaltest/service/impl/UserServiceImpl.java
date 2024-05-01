@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
    * @return the updated UserDto
    */
   public UserDto updatePartially(long id, JsonPatch patchData) {
-    User user = findById(id);
+    User user = findUserById(id);
     UserDto userDto = userMapper.toDto(user);
     UserDto userDtoPatched = patchUtil.applyPatch(patchData, userDto, UserDto.class);
     validationService.validateDto(userDtoPatched);
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
    * @return the updated UserDto
    */
   public UserDto update(long id, UserDto userDto) {
-    User user = findById(id);
+    User user = findUserById(id);
     userMapper.updateEntity(userDto, user);
     return userMapper.toDto(user);
   }
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
    * @param id the id of the user to delete
    */
   public void delete(long id) {
-    users.remove(findById(id));
+    users.remove(findUserById(id));
   }
 
   /**
@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
    * @return The user with the specified ID.
    * @throws UserNotFoundException If the user with the given ID is not found.
    */
-  private User findById(Long id) {
+  public User findUserById(Long id) {
     return users.stream()
         .filter(user -> id.equals(user.getId()))
         .findFirst()
